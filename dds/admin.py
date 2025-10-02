@@ -24,4 +24,13 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 @admin.register(CashFlow)
 class CashFlowAdmin(admin.ModelAdmin):
-    list_display = ("id", "created_at", "status", "type", "category", "subcategory", "sum", "comment")
+    list_display = (
+        "id",
+        "created_at",
+        "status",
+        "type",
+        "category",
+        "subcategory",
+        "sum",
+        "comment",
+    )

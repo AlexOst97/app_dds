@@ -1,10 +1,12 @@
 from rest_framework import generics
 from dds.models import Status, Type, Category, Subcategory, CashFlow
-from dds.serializers import (StatusSerializers,
-                             TypeSerializers,
-                             CategorySerializers,
-                             SubcategorySerializers,
-                             CashFlowSerializers)
+from dds.serializers import (
+    StatusSerializers,
+    TypeSerializers,
+    CategorySerializers,
+    SubcategorySerializers,
+    CashFlowSerializers,
+)
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from django.shortcuts import redirect
@@ -224,6 +226,7 @@ class CategoryUpdateAPIView(generics.UpdateAPIView):
             return redirect("dds:category-list")
         return Response({"serializer": serializer})
 
+
 class CategoryDestroyAPIView(generics.DestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializers
@@ -272,10 +275,7 @@ class SubcategoryCreateAPIView(generics.CreateAPIView):
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer()
         categories = Category.objects.all()
-        return Response({
-            "serializer": serializer,
-            "categories": categories
-        })
+        return Response({"serializer": serializer, "categories": categories})
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -295,11 +295,9 @@ class SubcategoryUpdateAPIView(generics.UpdateAPIView):
         obj = Subcategory.objects.get(pk=pk)
         categories = Category.objects.all()
         serializer = SubcategorySerializers(obj)
-        return Response({
-            "serializer": serializer,
-            "subcategory": obj,
-            "categories": categories
-        })
+        return Response(
+            {"serializer": serializer, "subcategory": obj, "categories": categories}
+        )
 
     def post(self, request, pk):
         obj = Subcategory.objects.get(pk=pk)
@@ -361,13 +359,15 @@ class CashFlowCreateAPIView(generics.CreateAPIView):
         types = Type.objects.all()
         categories = Category.objects.all()
         subcategories = Subcategory.objects.all()
-        return Response({
-            "serializer": serializer,
-            "statuses": statuses,
-            "types": types,
-            "categories": categories,
-            "subcategories": subcategories,
-        })
+        return Response(
+            {
+                "serializer": serializer,
+                "statuses": statuses,
+                "types": types,
+                "categories": categories,
+                "subcategories": subcategories,
+            }
+        )
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -390,14 +390,16 @@ class CashFlowUpdateAPIView(generics.UpdateAPIView):
         types = Type.objects.all()
         categories = Category.objects.all()
         subcategories = Subcategory.objects.all()
-        return Response({
-            "serializer": serializer,
-            "cashflow": obj,
-            "statuses": statuses,
-            "types": types,
-            "categories": categories,
-            "subcategories": subcategories,
-        })
+        return Response(
+            {
+                "serializer": serializer,
+                "cashflow": obj,
+                "statuses": statuses,
+                "types": types,
+                "categories": categories,
+                "subcategories": subcategories,
+            }
+        )
 
     def post(self, request, pk):
         obj = CashFlow.objects.get(pk=pk)
@@ -434,12 +436,12 @@ class InfoTableListAPIView(generics.ListAPIView):
     def get(self, request):
         queryset = CashFlow.objects.all()
 
-        date_from = request.GET.get('date_from')
-        date_to = request.GET.get('date_to')
-        status = request.GET.get('status')
-        type_filter = request.GET.get('type')
-        category = request.GET.get('category')
-        subcategory = request.GET.get('subcategory')
+        date_from = request.GET.get("date_from")
+        date_to = request.GET.get("date_to")
+        status = request.GET.get("status")
+        type_filter = request.GET.get("type")
+        category = request.GET.get("category")
+        subcategory = request.GET.get("subcategory")
 
         if date_from:
             queryset = queryset.filter(created_at__gte=date_from)
@@ -460,19 +462,21 @@ class InfoTableListAPIView(generics.ListAPIView):
         subcategories = Subcategory.objects.all()
 
         filters = {
-            'date_from': date_from,
-            'date_to': date_to,
-            'status': status,
-            'type': type_filter,
-            'category': category,
-            'subcategory': subcategory,
+            "date_from": date_from,
+            "date_to": date_to,
+            "status": status,
+            "type": type_filter,
+            "category": category,
+            "subcategory": subcategory,
         }
 
-        return Response({
-            "cashflows": queryset,
-            "status_choices": status_choices,
-            "type_choices": type_choices,
-            "categories": categories,
-            "subcategories": subcategories,
-            "filters": filters
-        })
+        return Response(
+            {
+                "cashflows": queryset,
+                "status_choices": status_choices,
+                "type_choices": type_choices,
+                "categories": categories,
+                "subcategories": subcategories,
+                "filters": filters,
+            }
+        )
