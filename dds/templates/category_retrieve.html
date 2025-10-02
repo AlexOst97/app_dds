@@ -1,0 +1,26 @@
+{% extends 'dds/dds_base.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row mt-5 justify-content-center">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">Номер id: {{ category.id }}</p>
+              <p class="card-text">Название категории: {{ category.name }}</p>
+              <p class="card-text">Описание категории: {{ category.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'dds:category-list' %}" role="button">Назад</a>
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'dds:category-update' category.pk %}" role="button">Редактировать</a>
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'dds:category-destroy' category.pk %}" role="button">Удалить</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

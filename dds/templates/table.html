@@ -1,0 +1,111 @@
+{% extends 'dds/dds_base.html' %}
+{% block content %}
+
+<div class="container mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Фильтры</h5>
+            <form method="get" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Дата с</label>
+                    <input type="date" class="form-control" name="date_from" value="{{ filters.date_from }}">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Дата по</label>
+                    <input type="date" class="form-control" name="date_to" value="{{ filters.date_to }}">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Статус</label>
+                    <select class="form-select" name="status">
+                        <option value="">Все</option>
+                        {% for status in status_choices %}
+                        <option value="{{ status.id }}" {% if filters.status == status.id|stringformat:"s" %}selected{% endif %}>
+                            {{ status.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Тип</label>
+                    <select class="form-select" name="type">
+                        <option value="">Все</option>
+                        {% for type in type_choices %}
+                        <option value="{{ type.id }}" {% if filters.type == type.id|stringformat:"s" %}selected{% endif %}>
+                            {{ type.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Категория</label>
+                    <select class="form-select" name="category">
+                        <option value="">Все</option>
+                        {% for category in categories %}
+                        <option value="{{ category.id }}" {% if filters.category == category.id|stringformat:"s" %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Подкатегория</label>
+                    <select class="form-select" name="subcategory">
+                        <option value="">Все</option>
+                        {% for subcategory in subcategories %}
+                        <option value="{{ subcategory.id }}" {% if filters.subcategory == subcategory.id|stringformat:"s" %}selected{% endif %}>
+                            {{ subcategory.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Применить фильтры</button>
+                    <a href="{% url 'dds:table' %}" class="btn btn-secondary">Сбросить</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Статус</th>
+                                <th>Тип</th>
+                                <th>Категория</th>
+                                <th>Подкатегория</th>
+                                <th>Сумма</th>
+                                <th>Комментарий</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cashflow in cashflows %}
+                            <tr>
+                                <td>{{ cashflow.created_at|date:"d.m.Y H:i" }}</td>
+                                <td>{{ cashflow.status.name }}</td>
+                                <td>{{ cashflow.type.name }}</td>
+                                <td>{{ cashflow.category.name }}</td>
+                                <td>{{ cashflow.subcategory.name }}</td>
+                                <td>{{ cashflow.sum }}</td>
+                                <td>{{ cashflow.comment|default:"-" }}</td>
+
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center">Нет данных</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -14,12 +14,14 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav flex-grow-1 justify-content-between">
-        <li class="nav-item"><a class="nav-link" href="">Главная</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="{% url 'dds:table' %}">Информационная таблица</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'dds:cashflow-list' %}">Движение денежных средств</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'dds:status-list' %}">Статусы</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Получатели</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Сообщения</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Рассылки</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Попытка рассылки</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'dds:type-list' %}">Типы операций</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'dds:category-list' %}">Катерогии</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'dds:subcategory-list' %}">Подкатегории</a></li>
+
          <li class="nav-item">
           </li>
         </ul>

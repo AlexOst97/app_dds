@@ -1,0 +1,32 @@
+{% extends 'dds/dds_base.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row mt-5 justify-content-center">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+
+              <p class="card-text">Номер id: {{ cashflow.id }}</p>
+              <p class="card-text">Время создания: {{ cashflow.created_at }}</p>
+              <p class="card-text">Статус: {{ cashflow.status }}</p>
+               <p class="card-text">Тип: {{ cashflow.type }}</p>
+               <p class="card-text">Категория: {{ cashflow.category }}</p>
+               <p class="card-text">Подкатегория: {{ cashflow.subcategory }}</p>
+               <p class="card-text">Сумма: {{ cashflow.sum }}</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'dds:cashflow-list' %}" role="button">Назад</a>
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'dds:cashflow-update' cashflow.pk %}" role="button">Редактировать</a>
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'dds:cashflow-destroy' cashflow.pk %}" role="button">Удалить</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
