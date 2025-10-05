@@ -36,3 +36,14 @@ class CashFlowSerializers(serializers.ModelSerializer):
         model = CashFlow
         fields = "__all__"
         read_only_fields = ("created_at",)
+
+    def validate(self, data):
+
+        if data["subcategory"].category != data["category"]:
+            raise serializers.ValidationError(
+                "Ошибка, подкатегория не принадлежит выбранной категории"
+            )
+        if data["category"].flow_type != data["flow_type"]:
+            raise serializers.ValidationError(
+                "Ошибка, категория не принадлежит выбранному типу операции"
+            )

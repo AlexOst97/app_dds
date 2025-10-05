@@ -20,9 +20,16 @@
 
 ## Инструкция по установке:
 
-1. Клонировать с GitHab (*git clone https://github.com/AlexOst97/app_dds/tree/feature/task1*)
-2. Установить зависимости (*poetry install*)
-
+1. Клонировать с GitHab (*git clone https://github.com/AlexOst97/app_dds/tree/feature/task1*);
+2. Установить зависимости (*poetry install*);
+3. Активация виртуального окружения (*poetry shell*);
+4. Создайте базу данных в PostgreSQL;
+5. Создайте файл *.env* в корне проекта и добавьте данные (см. файл *.env.sample*);
+6. Создайте и примените миграций (*python manage.py makemigrations* *python manage.py migrate*);
+7. Создайте суперпользователя (*python manage.py createsuperuser*);
+8. Запуск сервера разработки (*python manage.py runserver*);
+9. Доступ к приложению (*http://127.0.0.1:8000/dds/table/*);
+10. Доступ к Админ-панели (*http://127.0.0.1:8000/admin/*).
 
 ## Команда проекта:
 
